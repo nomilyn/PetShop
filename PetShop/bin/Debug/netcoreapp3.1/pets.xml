@@ -5,14 +5,40 @@
       <PetID>123</PetID>
       <PetName>Zoona</PetName>
       <Type>Dog</Type>
-      <Race>Beagle</Race>
-      <Color>Gray</Color>
+      <Race>Akita</Race>
+      <Color>Brown</Color>
       <Age>12</Age>
-      <GenService>Pets Hotel</GenService>
-      <SpeService>Standard Guest Room</SpeService>
-      <Price>40</Price>
+      <GenService>Grooming</GenService>
+      <SpeService>Bath and Haircut with FURminator</SpeService>
+      <Price>30</Price>
       <Owner>Mr. Abc</Owner>
       <PhoneNo>1234567890</PhoneNo>
+    </Pet>
+    <Pet xsi:type="Cat">
+      <PetID>222</PetID>
+      <PetName>Mhie</PetName>
+      <Type>Cat</Type>
+      <Race>Persian</Race>
+      <Color>Orange</Color>
+      <Age>12</Age>
+      <GenService>Pets Hotel</GenService>
+      <SpeService>Private Suite</SpeService>
+      <Price>50</Price>
+      <Owner>Mr. Nielsen</Owner>
+      <PhoneNo>1122334455</PhoneNo>
+    </Pet>
+    <Pet xsi:type="Cat">
+      <PetID>122</PetID>
+      <PetName>Wella</PetName>
+      <Type>Cat</Type>
+      <Race>Napoleon</Race>
+      <Color>Black</Color>
+      <Age>78</Age>
+      <GenService>Pets Hotel</GenService>
+      <SpeService>Private Suite</SpeService>
+      <Price>50</Price>
+      <Owner>Mr. John</Owner>
+      <PhoneNo>5544332211</PhoneNo>
     </Pet>
   </Pets>
 </PetList>

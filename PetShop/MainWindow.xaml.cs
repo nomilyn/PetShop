@@ -98,11 +98,11 @@ namespace PetShop
                     ClearForm();
                 }
                 btnSave.IsEnabled = true;
+                btnAdd.IsEnabled = true;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.GetBaseException().Message);
-                btnAdd.IsEnabled = true;
             }
         }
         //To save all the newly added data from datagrid to XML file
