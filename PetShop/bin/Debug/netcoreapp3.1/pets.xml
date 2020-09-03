@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PetList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Pets>
+    <Pet xsi:type="Dog">
+      <PetID>123</PetID>
+      <PetName>Zoona</PetName>
+      <Type>Dog</Type>
+      <Race>Beagle</Race>
+      <Color>Gray</Color>
+      <Age>12</Age>
+      <GenService>Pets Hotel</GenService>
+      <SpeService>Standard Guest Room</SpeService>
+      <Price>40</Price>
+      <Owner>Mr. Abc</Owner>
+      <PhoneNo>1234567890</PhoneNo>
+    </Pet>
+  </Pets>
+</PetList>

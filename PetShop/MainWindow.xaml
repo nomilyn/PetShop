@@ -1,0 +1,202 @@
+﻿<Window x:Class="PetShop.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PetShop"
+        xmlns:local1="clr-namespace:PetShop.Validations"
+        mc:Ignorable="d"
+        Title="Pet Shop System" Height="800" Width="1450" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid>
+        <Grid.Resources>
+            <Style TargetType="Label">
+                <Setter Property="Margin" Value="3"/>
+                <Setter Property="HorizontalContentAlignment"  Value="Right"/>
+                <Setter Property="FontWeight"  Value="SemiBold"/>
+            </Style>
+            <Style TargetType="StackPanel">
+                <Setter Property="Margin" Value="3"/>
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="Width" Value="50"/>
+                <Setter Property="Margin" Value="3"/>
+                <Setter Property="FontWeight"  Value="SemiBold"/>
+            </Style>
+            <Style TargetType="TextBox">
+                <Setter Property="Margin" Value="3"/>
+            </Style>
+        </Grid.Resources>
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,310">
+            <StackPanel Orientation="Horizontal" Margin ="5,0,0,85 " Width="1450" Height="339">
+                <StackPanel Orientation="Vertical" Width="280">
+                    <StackPanel Orientation="Horizontal" Width="280">
+                        <Label Content="Pet ID" Width="80"/>
+                        <TextBox Name="txtPetID" Width="160" ToolTip ="{Binding ElementName=txtPetID, Path=(Validation.Errors)[0].ErrorContent}">
+                            <TextBox.Text>
+                                <Binding Path="APet.PetID">
+                                    <Binding.ValidationRules>
+                                        <local1:PetIdRule Min="1" Max="999999"/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Width="280">
+                        <Label Content="Pet Name" Width="80"/>
+                        <TextBox Name="txtPetName" Width="160"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Width="280">
+                        <Label Content="Type" Width="80"/>
+                        <ComboBox Name="cboType" Width="160" SelectionChanged="cboType_SelectionChanged" Height="27"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Width="280">
+                        <Label Content="Race" Width="80"/>
+                        <ComboBox Name="cboRace" Width="160" Height="24"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Width="280">
+                        <Label Content="Color" Width="80"/>
+                        <ComboBox Name="cboColor" Width="160" Height="26"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Width="280">
+                        <Label Content="Age(Month)" Width="80"/>
+                        <TextBox Name="txtAge" Width="160" ToolTip ="{Binding ElementName=txtAge, Path=(Validation.Errors)[0].ErrorContent}">
+                            <TextBox.Text>
+                                <Binding Path="APet.Age">
+                                    <Binding.ValidationRules>
+                                        <local1:AgeRule Min="1.0" Max="60.0"/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Width="280">
+                    <StackPanel Orientation="Horizontal" Width="280">
+                        <Label Content="General Service"/>
+                        <ComboBox Name="cboGenService" Width="160" SelectionChanged="cboGenService_SelectionChanged" Height="27"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Width="280">
+                        <Label Content="Specific Service"/>
+                        <ComboBox Name="cboSpeService" Width="160" SelectionChanged="cboSpeService_SelectionChanged" Height="27"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Width="280">
+                        <Label Content="Price" Width="90"/>
+                        <TextBox Name="txtPrice" Width="160"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Width="280">
+                        <Label Content="Owner" Width="90"/>
+                        <TextBox Name="txtOwner" Width="160"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Width="280">
+                        <Label Content="Phone Number"/>
+                        <TextBox Name="txtPhoneNo" Width="160" ToolTip="{Binding ElementName=txtPhoneNo, Path=(Validation.Errors)[0].ErrorContent}">
+                            <TextBox.Text>
+                                <Binding Path="APet.PhoneNo">
+                                    <Binding.ValidationRules>
+                                        <local1:PhoneRule Min="1000000000" Max="9999999999"/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                            
+                        </TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5" Width="300">
+                        <Button Name="btnAdd" Content="Add" Margin="2,0" Click="btnAdd_Click" />
+                        <Button Name="btnSave" Content="Save" Margin="2,0" Click="btnSave_Click"/>
+                        <Button Name="btnReset" Content="Reset" Margin="2,0" Click="btnReset_Click"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5" Width="300">
+                        <Button Name="btnUpdate" Content="Update" Margin="2,0" Visibility="Hidden" Click="btnUpdate_Click"/>
+                        <Button Name="btnDelete" Content="Delete" Margin="2,0" Visibility="Hidden" Click="btnDelete_Click"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Orientation="Vertical"  Width="800">
+                    <StackPanel Orientation="Horizontal" Width="800" Height="210">
+                        <DataGrid x:Name="dgDisplay" Height="200" Width ="782" AutoGenerateColumns="False" ItemsSource="{Binding DisplayPets}">
+                            <DataGrid.Resources>
+                                <local1:RowConverter x:Key="MyConverter"/>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="Background" Value="Turquoise"/>
+                                    <Setter Property="FontWeight" Value="SemiBold"/>
+                                    <Setter Property="BorderThickness" Value="0,0,1,2"/>
+                                    <Setter Property="BorderBrush" Value="Black"/>
+                                </Style>
+                            </DataGrid.Resources>
+                            <DataGrid.RowStyle>
+                                <Style TargetType="{x:Type DataGridRow}">
+                                    <Setter Property="Background" Value="{Binding ., Converter={StaticResource MyConverter}}"/>
+                                </Style>
+                            </DataGrid.RowStyle>
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Name="btnDel" Content="Delete" Background="Red" Click="btnDelete_Click"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Name="btnUpdate" Content="Update" Background="Yellow"  Click="btnUpdate_Click" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTextColumn Header="Pet ID" Binding="{Binding PetID}"/>
+                                <DataGridTextColumn Header="Pet Name" Binding="{Binding PetName}"/>
+                                <DataGridTextColumn Header="Type" Binding="{Binding Type}"/>
+                                <DataGridTextColumn Header="Race" Binding="{Binding Race}"/>
+                                <DataGridTextColumn Header="Color" Binding="{Binding Color}"/>
+                                <DataGridTextColumn Header="Age" Binding="{Binding Age}"/>
+                                <DataGridTextColumn Header="General Service" Binding="{Binding GenService}"/>
+                                <DataGridTextColumn Header="Specific Service" Binding="{Binding SpeService}"/>
+                                <DataGridTextColumn Header="Price" Binding="{Binding Price}"/>
+                                <DataGridTextColumn Header="Owner" Binding="{Binding Owner}"/>
+                                <DataGridTextColumn Header="Phone Number" Binding="{Binding PhoneNo}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Button Name= "btnDisplay" Content="Display" Click="btnDisplay_Click"/>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel >
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="0,370,0,0">
+            <StackPanel Orientation="Vertical"  Margin="10" Width="1450">
+                <StackPanel Orientation="Horizontal" Width="800">
+                    <Label Content="Search By" />
+                    <ComboBox Name ="cboSearchBy" Width="130" Height="27" SelectionChanged="cboSearchBy_SelectionChanged"/>
+                    <Label Name="lblSearch"/>
+                    <TextBox Name="txtSearch" Width="100"/>
+                    <Button Name ="btnSearch" Content="Search" Click="btnSearch_Click"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"  Margin="5" Width="1430">
+                    <DataGrid x:Name="dgSearchList" AutoGenerateColumns="False" Margin ="200,0" Width ="1000" Height="270">
+                        <DataGrid.Resources>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="Background" Value="Turquoise"/>
+                                <Setter Property="FontWeight" Value="SemiBold"/>
+                                <Setter Property="BorderThickness" Value="0,0,1,2"/>
+                                <Setter Property="BorderBrush" Value="Black"/>
+                            </Style>
+                        </DataGrid.Resources>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Pet ID" Binding="{Binding PetID}"/>
+                            <DataGridTextColumn Header="Pet Name" Binding="{Binding PetName}"/>
+                            <DataGridTextColumn Header="Type" Binding="{Binding Type}"/>
+                            <DataGridTextColumn Header="Race" Binding="{Binding Race}"/>
+                            <DataGridTextColumn Header="Color" Binding="{Binding Color}"/>
+                            <DataGridTextColumn Header="Age" Binding="{Binding Age}"/>
+                            <DataGridTextColumn Header="General Service" Binding="{Binding GenService}"/>
+                            <DataGridTextColumn Header="Specific Service" Binding="{Binding SpeService}"/>
+                            <DataGridTextColumn Header="Price" Binding="{Binding Price}"/>
+                            <DataGridTextColumn Header="Owner" Binding="{Binding Owner}"/>
+                            <DataGridTextColumn Header="Phone Number" Binding="{Binding PhoneNo}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
